@@ -1,4 +1,5 @@
 #include "../Headers/Board.h"
+
 #include <vector>
 #include <algorithm>
 #include <stdlib.h>
@@ -14,16 +15,16 @@ Board::Board(int _length, int _height, int _pictureType)
     height = _height;
     pictureType = _pictureType;
     pointLeft = length*height;
-    matrix = new int* [height];
-    for (i = 0; i < height; i++)
-        matrix[i] = new int[length];
+    matrix = new int* [height+2];
+    for (i = 0; i < height+2; i++)
+        matrix[i] = new int[length+2];
     generate();
 }
 
 Board::~Board()
 {
     int i;
-    for (i = 0; i < height; i++)
+    for (i = 0; i <= height+1; i++)
         delete []matrix[i];
     delete []matrix;
 }
@@ -54,16 +55,16 @@ void Board::rearrange(int ** ptr)
 {
     std::vector<int> number;
     int i,j,k;
-    for (i = 0; i < height; i++)
-        for (j = 0; j < length; j++)
+    for (i = 1; i <= height; i++)
+        for (j = 1; j <= length; j++)
         {
             if (ptr[i][j] >= 0)
                 number.push_back(ptr[i][j]);
         }
     std::random_shuffle(number.begin(),number.end());
     std::vector<int>::iterator iter = number.begin();
-    for (i = 0; i < height; i++)
-        for (j = 0; j < length; j++)
+    for (i = 1; i <= height; i++)
+        for (j = 1; j <= length; j++)
         {
             if (ptr[i][j] >= 0)
             {
@@ -79,11 +80,11 @@ void Board::generate()
     int num;
     int tLeft = length*height;
     int x, y;
-    int **temp = new int *[height];
-    for (i = 0; i < height; i++)
-        temp[i] = new int[length];
-    for (i = 0; i < height; i++)
-        for (j = 0; j < length; j++)
+    int **temp = new int *[height+2];
+    for (i = 0; i <= height+1; i++)
+        temp[i] = new int[length+2];
+    for (i = 0; i <= height+1; i++)
+        for (j = 0; j <= length+1; j++)
             matrix[i][j] = temp[i][j] = -1;
 
     srand(time(NULL));
@@ -92,18 +93,18 @@ void Board::generate()
         num = rand() % pictureType;
         for (j = 0; j < 2; j++)
         {
-            x = rand()%height;
-            y = rand() % length;
+            x = rand()%height+1;
+            y = rand() % length+1;
             while (matrix[x][y] != -1)
             {
                 y++;
-                if ( y == length)
+                if ( y == length+1)
                 {
-                    y = 0;
+                    y = 1;
                     x += 1;
                 }
-                if (x == height)
-                    x = 0;
+                if (x == height+1)
+                    x = 1;
             }
             matrix[x][y] = num;
         }
@@ -111,10 +112,10 @@ void Board::generate()
 
     while (tLeft > 0)
     {
-        for (i = 0; i < height; i++)
-            for(j = 0; j < length; j++)
-                for (k = 0; k < height; k++)
-                    for (l = 0; l < length; l++)
+        for (i = 1; i <= height; i++)
+            for(j = 1; j <= length; j++)
+                for (k = 1; k <= height; k++)
+                    for (l = 1; l <= length; l++)
                     {
                         if (i == k && j == l)
                             continue;
@@ -151,9 +152,9 @@ bool Board::linkable(int x1, int y1, int x2, int y2)
 void Board::show()
 {
     int i,j;
-    for (i = 0; i < height; i++)
+    for (i = 1; i <= height; i++)
     {
-        for (j = 0; j < length; j++)
+        for (j = 1; j <= length; j++)
             std::cout << matrix[i][j] << " ";
         std::cout << "\n";
     }
