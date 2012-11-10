@@ -1,7 +1,7 @@
-AcrossLitePuzzle
+LinkGame
 ================
 
-DS &amp; A - Across lite puzzle
+DSA - Link Game
 
 ----
 
