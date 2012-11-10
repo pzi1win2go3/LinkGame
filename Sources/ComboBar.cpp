@@ -7,29 +7,29 @@ ComboBar::ComboBar()
     value = 1;
 }
 
-ComboBar::init()
+void ComboBar::init()
 {
     maxValue = MAXVALUE;
     highestValue = 1;
     value = 1;
 }
 
-ComboBar::getValue()
+double ComboBar::getValue()
 {
     return value;
 }
 
-ComboBar::getMaxValue()
+double ComboBar::getMaxValue()
 {
     return maxValue;
 }
 
-ComboBar::getHighestValue()
+double dComboBar::getHighestValue()
 {
     return highestValue;
 }
 
-ComboBar::fallDown(double down)
+void ComboBar::fallDown(double down)
 {
     if (value - down >= 1)
         value -= down;
@@ -38,7 +38,7 @@ ComboBar::fallDown(double down)
         value = 1;
 }
 
-ComboBar::bingo()
+void ComboBar::bingo()
 {
     score += value;
 
