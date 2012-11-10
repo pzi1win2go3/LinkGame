@@ -1,4 +1,4 @@
-#include "Board.h"
+#include "../Headers/Board.h"
 #include <vector>
 #include <algorithm>
 #include <stdlib.h>
