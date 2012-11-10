@@ -1,10 +1,143 @@
 #include "../Headers/Board.h"
+#include "../Headers/Point.h"
 #include <vector>
 #include <algorithm>
 #include <stdlib.h>
 #include <time.h>
-#include <iostream> 
+#include <iostream>
 #include <memory.h>
+
+bool Board::isDirectlyLinked(int x1,int y1,int x2,int y2)
+{
+    int i;
+    int x=x1>x2?x2:x1;      //x is the smaller number between x1 and x2
+    int y=y1>y2?y2:y1;      //y is the smaller number between y1 and y2
+    if(x1!=x2&&y1!=y2)
+        return false;
+
+
+    else if(x1==x2)
+    {
+        for(i=y+1;i<=(y1+y2-y-1);i++)
+        {
+            if(board[x1][i]!=0)
+                return false;
+
+
+        }
+    }
+    else if(y1==y2)
+    {
+        for(i=x+1;i<=(x1+x2-x)-1;i++)
+        {
+            if(board[i][y1]!=0)
+                return false;
+
+
+        }
+    }
+    return true;
+
+}
+
+
+bool Board::isTwoEdgesLinked(int x1,int y1,int x2,int y2,Point &temp)
+{
+    if(x1==x2||y1==y2)
+        return false;
+    if(isDirectlyLinked(x1,y1,x1,y2)&&isDirectlyLinked(x1,y2,x2,y2)&&board[x1][y2]==0)
+    {
+        temp.x=x1;
+        temp.y=y2;
+        return true;
+    }
+
+    if(isDirectlyLinked(x1,y1,x2,y1)&&isDirectlyLinked(x2,y1,x2,y2)&&board[x2][y1]==0)
+    {
+        temp.x=x2;
+        temp.y=y1;
+        return true;
+    }
+
+
+    return false;
+}
+
+
+bool isThreeEdgesLinked(int x1,int y1,int x2,int y2,Point &m,Point &n)
+{
+    int i;
+    if(x1!=x2) //if this two cells are not in the same line
+    {
+        for(i=y1+1;i<=row+1;i++)
+        {
+            if(board[x1][i]!=0)
+                break;
+            if(i==y2)
+                continue;
+            if(isTwoEdgesLinked(x1,i,x2,y2,m))
+            {
+                n.x=x1;
+                n.y=i;
+                return true;
+            }
+
+
+
+        }
+        for(i=y1-1;i>=0;i--)
+        {
+            if(board[x1][i]!=0)
+                break;
+            if(i==y2)
+                continue;
+            if(isTwoEdgesLinked(x1,i,x2,y2,m))
+            {
+                n.x=x1;
+                n.y=i;
+                return true;
+
+            }
+
+        }
+
+    }
+    if(y1!=y2) //if this two cells are not in the same line
+    {
+        for(i=x1+1;i<=line+1;i++)
+        {
+            if(board[i][y1]!=0)
+                break;
+            if(i==x2)
+                continue;
+            if(isTwoEdgesLinked(i,y1,x2,y2,m))
+            {
+                n.x=i;
+                n.y=y1;
+                return true;
+            }
+
+        }
+
+        for(i=x1-1;i>=0;i--)
+        {
+            if(board[i][y1]!=0)
+                break;
+            if(i==x2)
+                continue;
+            if(isTwoEdgesLinked(i,y1,x2,y2,m))
+            {
+                n.x=i;
+                n.y=y1;
+                return true;
+            }
+
+        }
+    }
+    return false;
+
+}
+
 
 /* generate matrix[height][length]*/
 Board::Board(int _length, int _height, int _pictureType)
@@ -30,19 +163,55 @@ Board::~Board()
 
 
 /* need to be written */
-bool Board::isSolvable()
+bool Board::isSolvable()  //return true if nothing can be linked
 {
+
+    int i,j,x,y;
+    for(i=1;i<=height;i++)
+    {
+        for(j=1;j<=length;j++)
+        {
+            for(x=i;x<=height;x++)
+            {
+                for(y=j+1;y<=length;y++)
+                {
+                    if(linkable(i,j,x,y))
+                        return false;
+                }
+
+            }
+        }
+    }
     return true;
 }
 
 
-/* need to be rewritten
- * get two points and return path
-int Board::findPath(Point p1, Point p2, Point tp1, Point tp2)
+
+int Board::findPath(Point p1, Point p2, Point &tp1, Point& tp2)
 {
-    
+    int x1=p1.x;
+    int y1=p1.y;
+    int x2=p2.x;
+    int y2=p2.y;
+    if(isDirectlyLinked(x1,y1,x2,y2))
+    {
+
+        tp1.x=tp2.x=tp1.y=tp2.y=-1;
+        return 0;
+
+    }
+    if(isTwoEdgesLinked(x1,y1,x2,y2,tp1))
+    {
+        tp2.x=tp2.y=-1;
+        return 1;
+    }
+    if(isThreeEdgesLinked(x1,y1,x2,y2,tp1,tp2))
+    {
+        return 2;
+    }
+    return -1;
 }
-*/
+
 
 
 void Board::rearrange()
@@ -88,7 +257,7 @@ void Board::generate()
 
     srand(time(NULL));
     for (i = 0; i < (height*length)/2; i++)
-    { 
+    {
         num = rand() % pictureType;
         for (j = 0; j < 2; j++)
         {
@@ -134,7 +303,7 @@ void Board::generate()
         delete []matrix[i];
     delete []matrix;
     matrix = temp;
-    
+
 }
 
 /* need to be rewritten
@@ -142,9 +311,22 @@ void Board::generate()
  */
 bool Board::linkable(int x1, int y1, int x2, int y2)
 {
-    if (matrix[x1][y1] == -1 || matrix[x2][y2] == -1)
+    if(matrix[x1][y1]!=matrix[x2][y2])
         return false;
-    return true;
+    int tmp1,tmp2;
+    if(isDirectlyLinked(x1,y1,x2,y2))
+    {
+        return true;
+    }
+    if(isTwoEdgesLinked(x1,y1,x2,y2,tmp1))
+    {
+        return true;
+    }
+    if(isThreeEdgesLinked(x1,y1,x2,y2,tmp1,tmp2))
+    {
+        return true;
+    }
+    return false;
 }
 
 /* for debug */
