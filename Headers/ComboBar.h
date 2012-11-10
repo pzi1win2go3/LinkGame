@@ -1,4 +1,4 @@
-#ifdef COMBOBAR_H
+#ifndef COMBOBAR_H
 #define COMBOBAR_H
 
 #define INCREASE 5                          // value increase when a link is down
