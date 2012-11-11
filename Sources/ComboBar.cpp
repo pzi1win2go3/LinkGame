@@ -24,7 +24,7 @@ double ComboBar::getMaxValue()
     return maxValue;
 }
 
-double dComboBar::getHighestValue()
+double ComboBar::getHighestValue()
 {
     return highestValue;
 }
