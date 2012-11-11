@@ -2,16 +2,14 @@
 
 ComboBar::ComboBar()
 {
-    maxValue = MAXVALUE;
-    highestValue = 1;
-    value = 1;
+    maxValue = COMBO_MAXVALUE;
+    value = highestValue = 1;
 }
 
 void ComboBar::init()
 {
-    maxValue = MAXVALUE;
-    highestValue = 1;
-    value = 1;
+    maxValue = COMBO_MAXVALUE;
+    value = highestValue = 1;
 }
 
 double ComboBar::getValue()
@@ -29,21 +27,24 @@ double ComboBar::getHighestValue()
     return highestValue;
 }
 
-void ComboBar::fallDown(double down)
+void ComboBar::fallDown()
 {
+    double down = COMBO_DECREASE;
+
     if (value - down >= 1)
         value -= down;
-    
     else
         value = 1;
 }
 
 void ComboBar::bingo()
 {
+    double up = COMBO_INCREASE;
+
     score += value;
 
-    if (value + INCREASE <= maxValue)
-        value += INCREASE;
+    if (value + up <= maxValue)
+        value += up;
     else
         value = maxValue;
 

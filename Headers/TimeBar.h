@@ -1,13 +1,18 @@
 #ifndef TIME_BAR_H
 #define TIME_BAR_H
 
-#define DECREASE 0.05               // value decreases every frame
-#define INCREASE 1                  // reward when a link is done
+// globla viarables for conveniently modifying
+double TIME_DECREASE = 0.05;        // value decreases every frame
+double TIME_INCREASE = 1;           // reward when a link is done
+double TIME_MAXVALUE = 60;          // initialized time value
+
 
 class TimeBar
 {
 public:
-    TimeBar(double maxTime);        // constructor
+    TimeBar();                      // constructor
+
+    void init();                    // called when a new game starts
 
     void passBy();                  // time passes by, called every frame
 

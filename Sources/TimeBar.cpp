@@ -1,24 +1,33 @@
 #include "../Headers/TimeBar.h"
 
-TimeBar::TimeBar(double maxTime)
+TimeBar::TimeBar()
 {
-    maxValue = value = maxTime;
+    maxValue = value = TIME_MAXVALUE;
+}
+
+void TimeBar::init()
+{
+    maxValue = value = TIME_MAXVALUE;
 }
 
 void TimeBar::passBy()
 {
-    if (value - DECREASE < 0)
+    double down = TIME_DECREASE;
+
+    if (value - down < 0)
         value = 0;
     else
-        value -= DECREASE;
+        value -= down;
 }
 
 void TimeBar::bingo()
 {
-    if (value + INCREASE > maxValue)
+    double up = TIME_INCREASE;
+
+    if (value + up > maxValue)
         value = maxValue;
     else
-        value += INCREASE;
+        value += up;
 }
 
 double TimeBar::getValue()

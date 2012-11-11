@@ -1,10 +1,12 @@
 #ifndef COMBOBAR_H
 #define COMBOBAR_H
 
-#define INCREASE 5                          // value increase when a link is down
-#define MAXVALUE 100
-
 extern double score;
+
+// globla viarables for conveniently modifying
+double COMBO_DECREASE = 0.1;                // value decrease every frame
+double COMBO_INCREASE = 5;                  // value increase when a link is down
+double COMBO_MAXVALUE = 100;                // the max value that you can reach
 
 class ComboBar
 {
@@ -19,12 +21,12 @@ public:
 
     double getHighestValue();               // API to private highest value
 
-    void fallDown(double down = 0.1);       // decrease value, called every frame
+    void fallDown();       // decrease value, called every frame
 
     void bingo();                           // make bar jump up and update your score, called when a link is down
 
 private:
-    double maxValue;                        // max value you can reach, initialized as 100
+    double maxValue;                        // the max value you can reach, initialized as MAXVALUE
 
     double highestValue;                    // the highest value you reach
 
