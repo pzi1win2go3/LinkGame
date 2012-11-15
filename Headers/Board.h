@@ -1,6 +1,6 @@
 # ifndef BOARD_H
 # define BOARD_H
-
+# include "Point.h"
 
 
 class Board
@@ -14,9 +14,9 @@ public:
 	int  findPath(Point p1, Point p2, Point &tp1, Point& tp2);	// ! unfinished !	given two points, find the path
 	bool linkable(int x1, int y1, int x2, int y2);				// ! unfinished !	judge whether two points are linkable
 	void show();												// for debug
-	bool is_directly_linked(int x1,int y1,int x2,int y2);
-	bool is_two_edges_linked(int x1,int y1,int x2,int y2,Point &temp);
-	bool is_three_edges_linked(int x1,int y1,int x2,int y2,Point &m,Point &n);
+	bool isDirectlyLinked(int x1,int y1,int x2,int y2);
+	bool isTwoEdgesLinked(int x1,int y1,int x2,int y2,Point &temp);
+	bool isThreeEdgesLinked(int x1,int y1,int x2,int y2,Point &m,Point &n);
 private:
 	int** matrix;												// -1 for no picture, 0..n for picture number
 	int length;													// horizontal length  2nd dimension in array
