@@ -75,10 +75,10 @@ bool Board::isThreeEdgesLinked(int x1,int y1,int x2,int y2,Point &m,Point &n)
                 break;
             if(i==y2)
                 continue;
-            if(isTwoEdgesLinked(x1,i,x2,y2,m))
+            if(isTwoEdgesLinked(x1,i,x2,y2,n))
             {
-                n.x=x1;
-                n.y=i;
+                m.x=x1;
+                m.y=i;
                 return true;
             }
 
@@ -91,10 +91,10 @@ bool Board::isThreeEdgesLinked(int x1,int y1,int x2,int y2,Point &m,Point &n)
                 break;
             if(i==y2)
                 continue;
-            if(isTwoEdgesLinked(x1,i,x2,y2,m))
+            if(isTwoEdgesLinked(x1,i,x2,y2,n))
             {
-                n.x=x1;
-                n.y=i;
+                m.x=x1;
+                m.y=i;
                 return true;
 
             }
@@ -110,10 +110,10 @@ bool Board::isThreeEdgesLinked(int x1,int y1,int x2,int y2,Point &m,Point &n)
                 break;
             if(i==x2)
                 continue;
-            if(isTwoEdgesLinked(i,y1,x2,y2,m))
+            if(isTwoEdgesLinked(i,y1,x2,y2,n))
             {
-                n.x=i;
-                n.y=y1;
+                m.x=i;
+                m.y=y1;
                 return true;
             }
 
@@ -125,10 +125,10 @@ bool Board::isThreeEdgesLinked(int x1,int y1,int x2,int y2,Point &m,Point &n)
                 break;
             if(i==x2)
                 continue;
-            if(isTwoEdgesLinked(i,y1,x2,y2,m))
+            if(isTwoEdgesLinked(i,y1,x2,y2,n))
             {
-                n.x=i;
-                n.y=y1;
+                m.x=i;
+                m.y=y1;
                 return true;
             }
 
