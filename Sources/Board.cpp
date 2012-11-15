@@ -287,21 +287,21 @@ void Board::generate()
                     {
                         if (i == k && j == l)
                             continue;
-						if (matrix[i][j] != -1 && matrix[k][l] != -1)
-						{
-							//std::cout << i << ' ' << j << ':' << matrix[i][j] << '\n';
-							if (linkable(i,j,k,l))
-							{
-								temp[i][j] = matrix[i][j];
-								temp[k][l] = matrix[k][l];
-								matrix[i][j] = matrix[k][l] = -1;
-								tLeft -= 2;
-							}
-						}
+                        if (matrix[i][j] != -1 && matrix[k][l] != -1)
+                        {
+                            //std::cout << i << ' ' << j << ':' << matrix[i][j] << '\n';
+                            if (linkable(i,j,k,l))
+                            {
+                                temp[i][j] = matrix[i][j];
+                                temp[k][l] = matrix[k][l];
+                                matrix[i][j] = matrix[k][l] = -1;
+                                tLeft -= 2;
+                            }
+                        }
                     }
 
         rearrange(matrix);
-		//show();
+        //show();
     }
 
     for (i = 0; i < height; i++)
@@ -318,8 +318,8 @@ bool Board::linkable(int x1, int y1, int x2, int y2)
 {
     if(matrix[x1][y1]!=matrix[x2][y2])
         return false;
-	if (matrix[x1][y1] == -1 ||matrix[x2][y2] == -1 )
-		return false;
+    if (matrix[x1][y1] == -1 ||matrix[x2][y2] == -1 )
+        return false;
     Point tmp1,tmp2;
     if(isDirectlyLinked(x1,y1,x2,y2))
     {
