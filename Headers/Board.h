@@ -10,9 +10,9 @@ public:
 	~Board();
 	void rearrange();											// rearrange puzzle when matrix is unsolvable
 	void generate();											// generate the whole puzzle
-	bool isSolvable();											// ! unfinished !	check whether solvable
-	int  findPath(Point p1, Point p2, Point &tp1, Point& tp2);	// ! unfinished !	given two points, find the path
-	bool linkable(int x1, int y1, int x2, int y2);				// ! unfinished !	judge whether two points are linkable
+	bool isSolvable();											
+	int  findPath(Point p1, Point p2, Point &tp1, Point& tp2);	
+	bool linkable(int x1, int y1, int x2, int y2);				
 	void show();												// for debug
 	bool isDirectlyLinked(int x1,int y1,int x2,int y2);
 	bool isTwoEdgesLinked(int x1,int y1,int x2,int y2,Point &temp);
