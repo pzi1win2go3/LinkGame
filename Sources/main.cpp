@@ -1,6 +1,6 @@
 #include "../Headers/LinkGame.h"
 #include "../Headers/Board.h"
-# include "../Headers/Point.h"
+#include "../Headers/Point.h"
 #include "DxLib.h"
 #include <stdio.h>
 
