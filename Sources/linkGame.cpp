@@ -1,4 +1,5 @@
 #include "../Headers/LinkGame.h"
+#include "DxLib.h"
 
 LinkGame::LinkGame()
 {
@@ -18,10 +19,10 @@ void LinkGame::setScore(int s) {
 }
 
 bool LinkGame::timeIsUp() {
-    return (timeBar->getValue < 1.0E-6);
+    return (timeBar->getValue() < 1.0E-6);
 }
 
-void LinkGame::draw() {
+/* void LinkGame::draw() {
     if (engine->getStatus() == InWelcome)
     {
         int aboutUsCr = getColor(0, 0, 255);
@@ -56,6 +57,10 @@ void LinkGame::draw() {
                 exitCr, TRUE);
     }
 }   
+*/
+
+void LinkGame::draw() {
+}
 
 void LinkGame::reset() {
     delete board;
@@ -81,10 +86,14 @@ int LinkGame::getStatus() {
     return gameStatus;
 }
 
-void timerEvent() {
+void LinkGame::timerEvent() {
     timeBar->passBy();
 }
 
-Board *getBoard() {
+Board *LinkGame::getBoard() {
     return board;
+}
+
+void LinkGame::aboutUs() {
+	gameStatus = InAboutUs;
 }

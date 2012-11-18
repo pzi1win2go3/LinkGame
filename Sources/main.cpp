@@ -1,4 +1,4 @@
-#include "../Headers/LinkGame.h"
+﻿#include "../Headers/LinkGame.h"
 #include "../Headers/Board.h"
 #include "../Headers/Point.h"
 #include "DxLib.h"
@@ -20,7 +20,8 @@ int exitLeftTopX, exitLeftTopY, exitRightBottomX, exitRightBottomY;
 int restartLeftTopX, restartLeftTopY, restartRightBottomX, restartRightBottomY;
 
 
-enum {InGame, InWelcome, InFinish};
+enum {InGame, InWelcome, InFinish, InAboutUs};
+LinkGame *engine;
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
 {
@@ -29,7 +30,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	bool click = false;
 	SetGraphMode( 640 , 480 , 16 ) ;
 	DxLib_Init();
-    LinkGame *engine = new LinkGame;
+    engine = new LinkGame;
 	SetMouseDispFlag( TRUE ) ;
 	int Cr = GetColor(  0 , 0 , 255 ) ;// for debug
 	Point input1, input2, rtn1, rtn2;
@@ -66,7 +67,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
         	if (mouseInput)
         	{
         		if (mouseX >= welcomeLeftTopX && mouseY >= welcomeLeftTopY && mouseX <= welcomeRightBottomX && mouseY <= welcomeRightBottomY)
-        			engine->init();
+        			engine->startGame();
         	}
         }
 		else if (engine->getStatus() == InGame) 

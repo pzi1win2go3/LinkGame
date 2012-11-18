@@ -142,7 +142,7 @@ bool Board::isThreeEdgesLinked(int x1,int y1,int x2,int y2,Point &m,Point &n)
 /* generate matrix[height][length]*/
 Board::Board(int _length, int _height, int _pictureType)
 {
-    int i, j, k;
+    int i;
     length = _length;
     height = _height;
     pictureType = _pictureType;
@@ -222,7 +222,7 @@ void Board::rearrange()
 void Board::rearrange(int ** ptr)
 {
     std::vector<int> number;
-    int i,j,k;
+    int i,j;
     for (i = 1; i <= height; i++)
         for (j = 1; j <= length; j++)
         {
@@ -255,7 +255,7 @@ void Board::generate()
         for (j = 0; j <= length+1; j++)
             matrix[i][j] = temp[i][j] = -1;
 
-    srand(time(NULL));
+    srand((unsigned int)time(NULL));
     for (i = 0; i < (height*length)/2; i++)
     { 
         num = rand() % pictureType;

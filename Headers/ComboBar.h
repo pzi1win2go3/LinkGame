@@ -3,7 +3,7 @@
 
 #include "LinkGame.h"
 
-extern LinkGame *engine;
+// extern LinkGame *engine;
 
 // globla viarables for conveniently modifying
 #define COMBO_DECREASE 0.1                // value decrease every frame

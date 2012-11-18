@@ -1,8 +1,8 @@
-#ifndef LINK_GAME_H
+﻿#ifndef LINK_GAME_H
 #define LINK_GAME_H
 
 #include "Board.h"
-#include "../Headers/ComboBar.h"
+#include "ComboBar.h"
 #include "Point.h"
 #include "TimeBar.h"
 
@@ -27,7 +27,8 @@ private:
     enum status_t {
         InGame,
         InWelcome,
-        InFinish
+        InFinish,
+		InAboutUs
     } gameStatus;
 
     Board *board;
@@ -60,6 +61,10 @@ public:
     void timerEvent();      // 每一帧都要做的事情
 
     Board * getBoard();
+
+	void aboutUs();
+
+	bool timeIsUp();
 };
 
 #endif
