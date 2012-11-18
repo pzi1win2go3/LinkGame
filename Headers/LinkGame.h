@@ -2,7 +2,7 @@
 #define LINK_GAME_H
 
 #include "Board.h"
-#include "ComboBar.h"
+#include "../Headers/ComboBar.h"
 #include "Point.h"
 #include "TimeBar.h"
 
@@ -27,8 +27,7 @@ private:
     enum status_t {
         InGame,
         InWelcome,
-        InFinish,
-        InAboutUs
+        InFinish
     } gameStatus;
 
     Board *board;
@@ -44,8 +43,6 @@ public:
 
     LinkGame();             // 构造函数
 
-    void aboutUs();         // 关于我们
-
     void startGame();       // 开始游戏
 
     void draw();            // 画图
@@ -54,15 +51,15 @@ public:
 
     void setScore(int s);   // 得分
 
-    bool timeIsUp();        // 判断时间是否耗尽
-
     void reset();           // 重置游戏环境
 
     void finish();          // 进入游戏结束页
 
     int getStatus();
 
-	Board * getBoard();
+    void timerEvent();      // 每一帧都要做的事情
+
+    Board * getBoard();
 };
 
 #endif

@@ -5,10 +5,6 @@ LinkGame::LinkGame()
     init();
 }
 
-void LinkGame::aboutUs() {
-    gameStatus = InAboutUs;
-}
-
 void LinkGame::startGame() {
     gameStatus = InGame;
 }
@@ -59,7 +55,7 @@ void LinkGame::draw() {
         DrawBox(exitLeftTopX, exitLeftTopY, exitRightBottomX, exitRightBottomY,
                 exitCr, TRUE);
     }
-}
+}   
 
 void LinkGame::reset() {
     delete board;
@@ -85,7 +81,10 @@ int LinkGame::getStatus() {
     return gameStatus;
 }
 
-Board* LinkGame::getBoard()
-{
-	return board;
+void timerEvent() {
+    timeBar->passBy();
+}
+
+Board *getBoard() {
+    return board;
 }
