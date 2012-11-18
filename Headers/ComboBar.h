@@ -4,9 +4,9 @@
 extern double score;
 
 // globla viarables for conveniently modifying
-double COMBO_DECREASE = 0.1;                // value decrease every frame
-double COMBO_INCREASE = 5;                  // value increase when a link is down
-double COMBO_MAXVALUE = 100;                // the max value that you can reach
+#define COMBO_DECREASE 0.1;                // value decrease every frame
+#define COMBO_INCREASE 5;                  // value increase when a link is down
+#define COMBO_MAXVALUE 100;                // the max value that you can reach
 
 class ComboBar
 {
