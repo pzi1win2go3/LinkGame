@@ -13,11 +13,11 @@ int main()
         engine->draw();
 
         if (engine->getStatus() == InWelcome) {
-
+            // 游戏欢迎页面要响应的时间
         } else if (engine->getStatus() == InGame) {
-
+            // 游戏进行页面要响应的事件
         } else if (engine->getStatus() == InFinish) {
-
+            // 游戏结束页面要响应的时间
         } else {
             printf("Something Went Wrong!\n");
             return 0;
