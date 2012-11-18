@@ -46,7 +46,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 			GetMousePoint( &mouseX, &mouseY );
 		}
 
-        engine->draw();
+        engine->draw(); 
 
         if (engine->getStatus() == InWelcome)
 		{
