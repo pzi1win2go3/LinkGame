@@ -8,15 +8,17 @@ int score = 0;
 // 欢迎界面开始游戏按钮
 int startGameLeftTopX = 200, startGameLeftTopY = 300,  startGameRightBottomX = 300,startGameRightBottomY = 350;
 // 欢迎界面关于我们按钮
-int aboutUsLeftTopX, aboutUsLeftTopY,  aboutUsRightBottomX,aboutUsRightBottomY;
+int aboutUsLeftTopX, aboutUsLeftTopY, aboutUsRightBottomX, aboutUsRightBottomY;
+// 关于我们界面返回欢迎界面的按钮
+int welcomeLeftTopX, welcomeLeftTopY, welcomeRightBottomX, welcomeRightBottomY;
 // 游戏界面退出游戏按钮
-int finishLeftTopX, finishLeftTopY, finishRightBottomX,finishRightBottomY;
+int finishLeftTopX, finishLeftTopY, finishRightBottomX, finishRightBottomY;
 // 游戏界面board的范围
-int boardLeftTopX, boardLeftTopY,  boardRightBottomX,boardRightBottomY;
+int boardLeftTopX, boardLeftTopY, boardRightBottomX, boardRightBottomY;
 // 结束界面退出游戏按钮
-int exitLeftTopX, exitLeftTopY,  exitRightBottomX,exitRightBottomY;
+int exitLeftTopX, exitLeftTopY, exitRightBottomX, exitRightBottomY;
 // 结束界面重新开始按钮
-int restartLeftTopX, restartLeftTopY,  restartRightBottomX,restartRightBottomY;
+int restartLeftTopX, restartLeftTopY, restartRightBottomX, restartRightBottomY;
 
 
 enum {InGame, InWelcome, InFinish};
@@ -56,8 +58,17 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 				if (mouseX >= startGameLeftTopX && mouseY >= startGameLeftTopY && mouseX <= startGameRightBottomX && mouseY <= startGameRightBottomY )
 					engine->startGame();
 				if (mouseX >= aboutUsLeftTopX && mouseY >= aboutUsLeftTopY && mouseX <= aboutUsRightBottomX && mouseY <= aboutUsRightBottomY )
-					;//关于我们
+					engine->aboutUs();//关于我们
 			}
+        }
+        else if (engine->getStatus() == InAboutUs)
+        {
+        	// 关于我们页面要响应的事件
+        	if (mouseInput)
+        	{
+        		if (mouseX >= welcomeLeftTopX && mouseY >= welcomeLeftTopY && mouseX <= welcomeRightBottomX && mouseY <= welcomeRightBottomY)
+        			engine->init();
+        	}
         }
 		else if (engine->getStatus() == InGame) 
 		{
@@ -65,10 +76,10 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             // 游戏进行页面要响应的事件
 
 			/*-- 关于时间--*/
-			//if ( TIME UP)
-			//	engine->finish();
+			if (engine->timeIsUp())
+				engine->finish();
 
-			if ( engine->getBoard()->empty())
+			if (engine->getBoard()->empty())
 				engine->finish();
 
 			/*--------------------------------响应鼠标----------------------------------------------------*/

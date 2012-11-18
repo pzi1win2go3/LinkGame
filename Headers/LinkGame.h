@@ -11,7 +11,8 @@ private:
     enum status_t {
         InGame,
         InWelcome,
-        InFinish
+        InFinish,
+        InAboutUs
     } gameStatus;
 
     Board *board;
@@ -27,6 +28,8 @@ public:
 
     LinkGame();             // 构造函数
 
+    void aboutUs();         // 关于我们
+
     void startGame();       // 开始游戏
 
     void draw();            // 画图
@@ -34,6 +37,8 @@ public:
     int getScore();         // 设置得分
 
     void setScore(int s);   // 得分
+
+    bool timeIsUp();        // 判断时间是否耗尽
 
     void reset();           // 重置游戏环境
 

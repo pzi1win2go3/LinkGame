@@ -5,6 +5,10 @@ LinkGame::LinkGame()
     init();
 }
 
+void LinkGame::aboutUs() {
+    gameStatus = InAboutUs;
+}
+
 void LinkGame::startGame() {
     gameStatus = InGame;
 }
@@ -15,6 +19,10 @@ int LinkGame::getScore() {
 
 void LinkGame::setScore(int s) {
     score = s;
+}
+
+bool LinkGame::timeIsUp() {
+    return (timeBar->getValue < 1.0E-6);
 }
 
 void LinkGame::draw() {}
