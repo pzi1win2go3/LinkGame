@@ -1,7 +1,7 @@
 # ifndef BOARD_H
 # define BOARD_H
 # include "Point.h"
-
+// #include "LinkGame.h"
 
 class Board
 {
@@ -21,6 +21,10 @@ public:
 	void changeMode(Point p);
 	void resetMode(Point p);
 	bool empty();
+
+	int getLength();
+	int getHeight();
+	int getVal(Point & p);
 private:
 	int** matrix;												// -1 for no picture, 0..n for picture number
 	int length;													// horizontal length  2nd dimension in array

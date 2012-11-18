@@ -1,9 +1,16 @@
-#include "../Headers/LinkGame.h"
+#include "LinkGame.h"
 #include "DxLib.h"
+#include "stdio.h"
 
 LinkGame::LinkGame()
 {
     init();
+	char filename[10] = {};
+
+	for (int i = 0; i < 8; i++) {
+		sprintf(filename, "%d.png", i);
+		pics[i] = LoadGraph(filename);
+	}
 }
 
 void LinkGame::startGame() {
@@ -22,50 +29,37 @@ bool LinkGame::timeIsUp() {
     return (timeBar->getValue() < 1.0E-6);
 }
 
-/* void LinkGame::draw() {
-    if (engine->getStatus() == InWelcome)
-    {
-        int aboutUsCr = getColor(0, 0, 255);
-        int startGameCr = getColor(0, 255, 0);
-        DrawBox(aboutUsLeftTopX, aboutUsLeftTopY, aboutUsRightBottomX, aboutUsRightBottomY,
-                aboutUsCr, TRUE);
-        DrawBox(startGameLeftTopX, startGameLeftTopY, startGameRightBottomX, startGameRightBottomY,
-                startGameCr, TRUE);
-    }
-    if (engine->getStatus() == InAboutUs)
-    {
-        int welcomeCr = getColor(255, 0, 0);
-        DrawBox(welcomeLeftTopX, welcomeLeftTopY, welcomeRightBottomX, welcomeRightBottomY,
-                welcomeCr, TRUE);
-    }
-    if (engine->getStatus() == InGame)
-    {
-        int finishCr = getColor(0, 0, 255);
-        int boardCr = getColor(255, 255, 255);
-        DrawBox(finishLeftTopX, finishLeftTopY, finishRightBottomX, finishRightBottomY,
-                finishCr, TRUE);
-        DrawBox(boardLeftTopX, boardLeftTopY, boardRightBottomX, boardRightBottomY,
-                boardCr, TRUE);
-    }
-    if (engine->getStatus() == InFinish)
-    {
-        int restartCr = getColor(0, 255, 255);
-        int exitCr = getColor(255, 255, 0);
-        DrawBox(restartLeftTopX, restartLeftTopY, restartRightBottomX, restartRightBottomY,
-                restartCr, TRUE);
-        DrawBox(exitLeftTopX, exitLeftTopY, exitRightBottomX, exitRightBottomY,
-                exitCr, TRUE);
-    }
-}   
-*/
-
 void LinkGame::draw() {
+	int MouseX, MouseY;
+	GetMousePoint(&MouseX, &MouseY);
+	
+	ClearDrawScreen();
+	
+	if (gameStatus == InWelcome) {
+		LoadGraphScreen(0, 0, "welcome.png", true);
+	} else if (gameStatus == InGame) {
+		LoadGraphScreen(0, 0, "game.png", true);
+		
+		for (int i = 1; i <= board->getHeight(); i++) {
+			for (int j = 1; j <= board->getLength(); j++) {
+				DrawGraph(Point(i, j).toX(), Point(i, j).toY(), pics[board->getVal(Point(i, j))], true);
+			}
+		}
+	} else if (gameStatus == InAboutUs) {
+		LoadGraphScreen(0, 0, "about.png", true);
+	} else if (gameStatus == InFinish) {
+		LoadGraphScreen(0, 0, "win.png", true);	
+	}
+
+	DrawFormatString(0, 0, GetColor(255, 255, 255), "(%d, %d) ON %d", MouseX, MouseY, gameStatus);
+
+	ScreenFlip();
 }
 
 void LinkGame::reset() {
     delete board;
     delete timeBar;
-    delete comboBar;
+    // delete comboBar;
 
     init();
 }
@@ -76,9 +70,9 @@ void LinkGame::finish() {
 
 void LinkGame::init() {
     gameStatus = InWelcome;
-    board = new Board(18, 15, 8);
+    board = new Board(7, 10, 8);
     timeBar = new TimeBar();
-    comboBar = new ComboBar();
+    // comboBar = new ComboBar();
     score = 0;
 }
 
@@ -96,4 +90,15 @@ Board *LinkGame::getBoard() {
 
 void LinkGame::aboutUs() {
 	gameStatus = InAboutUs;
+}
+
+void LinkGame::menu() {
+	gameStatus = InWelcome;
+
+	reset();
+}
+
+void LinkGame::quit() {
+	delete board;
+	delete timeBar;
 }

@@ -1,4 +1,4 @@
-﻿#include "../Headers/ComboBar.h"
+#include "ComboBar.h"
 
 ComboBar::ComboBar()
 {
@@ -41,8 +41,8 @@ void ComboBar::bingo()
 {
     double up = COMBO_INCREASE;
 
-    int score = engine->getScore() + (int)value;
-    engine->setScore(score);
+    // int score = engine->getScore() + (int)value;
+    // engine->setScore(score);
 
     if (value + up <= maxValue)
         value += up;

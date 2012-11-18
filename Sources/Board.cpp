@@ -1,5 +1,5 @@
-#include "../Headers/Board.h"
-#include "../Headers/Point.h"
+#include "Board.h"
+#include "Point.h"
 #include <vector>
 #include <algorithm>
 #include <stdlib.h>
@@ -368,4 +368,14 @@ void Board::resetMode(Point p)
 bool Board::empty()
 {
 	return pointLeft == 0;
+}
+
+int Board::getLength() {
+	return length;
+}
+int Board::getHeight() {
+	return height;
+}
+int Board::getVal(Point & p) {
+	return matrix[p.x][p.y];
 }

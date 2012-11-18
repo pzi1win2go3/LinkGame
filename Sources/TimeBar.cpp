@@ -1,4 +1,4 @@
-#include "../Headers/TimeBar.h"
+#include "TimeBar.h"
 
 TimeBar::TimeBar()
 {

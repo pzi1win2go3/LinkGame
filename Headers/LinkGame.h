@@ -1,25 +1,12 @@
-﻿#ifndef LINK_GAME_H
+#ifndef LINK_GAME_H
 #define LINK_GAME_H
 
-#include "Board.h"
 #include "ComboBar.h"
 #include "Point.h"
 #include "TimeBar.h"
-
-// 欢迎界面开始游戏按钮
-extern int startGameLeftTopX, startGameLeftTopY, startGameRightBottomX, startGameRightBottomY;
-// 欢迎界面关于我们按钮
-extern int aboutUsLeftTopX, aboutUsLeftTopY, aboutUsRightBottomX, aboutUsRightBottomY;
-// 关于我们界面返回欢迎界面的按钮
-extern int welcomeLeftTopX, welcomeLeftTopY, welcomeRightBottomX, welcomeRightBottomY;
-// 游戏界面退出游戏按钮
-extern int finishLeftTopX, finishLeftTopY, finishRightBottomX, finishRightBottomY;
-// 游戏界面board的范围
-extern int boardLeftTopX, boardLeftTopY, boardRightBottomX, boardRightBottomY;
-// 结束界面退出游戏按钮
-extern int exitLeftTopX, exitLeftTopY, exitRightBottomX, exitRightBottomY;
-// 结束界面重新开始按钮
-extern int restartLeftTopX, restartLeftTopY, restartRightBottomX, restartRightBottomY;
+#include "size.h"
+#include "Board.h"
+#define MAXPIC 8
 
 class LinkGame
 {
@@ -31,40 +18,47 @@ private:
 		InAboutUs
     } gameStatus;
 
+	ComboBar *comboBar;
+
     Board *board;
 
     TimeBar *timeBar;
 
-    ComboBar *comboBar;
-
     int score;
 
-    void init();            // 初始化游戏
+	int pics[MAXPIC];
+
+    void init();            // ��ʼ����Ϸ
 public:
+	int welcomeGraph;
 
-    LinkGame();             // 构造函数
+    LinkGame();             // ���캯��
 
-    void startGame();       // 开始游戏
+    void startGame();       // ��ʼ��Ϸ
 
-    void draw();            // 画图
+    void draw();            // ��ͼ
 
-    int getScore();         // 设置得分
+    int getScore();         // ���õ÷�
 
-    void setScore(int s);   // 得分
+    void setScore(int s);   // �÷�
 
-    void reset();           // 重置游戏环境
+    void reset();           // ������Ϸ����
 
-    void finish();          // 进入游戏结束页
+    void finish();          // ������Ϸ����ҳ
 
     int getStatus();
 
-    void timerEvent();      // 每一帧都要做的事情
+    void timerEvent();      // ÿһ֡��Ҫ��������
 
     Board * getBoard();
 
 	void aboutUs();
 
 	bool timeIsUp();
+
+	void menu();
+
+	void quit();
 };
 
 #endif

@@ -1,10 +1,6 @@
 #ifndef COMBOBAR_H
 #define COMBOBAR_H
 
-#include "LinkGame.h"
-
-// extern LinkGame *engine;
-
 // globla viarables for conveniently modifying
 #define COMBO_DECREASE 0.1                // value decrease every frame
 #define COMBO_INCREASE 5				  // value increase when a link is down

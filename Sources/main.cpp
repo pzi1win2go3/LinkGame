@@ -1,38 +1,52 @@
-ï»¿#include "../Headers/LinkGame.h"
-#include "../Headers/Board.h"
-#include "../Headers/Point.h"
+#include "LinkGame.h"
+#include "Board.h"
+#include "Point.h"
 #include "DxLib.h"
 #include <stdio.h>
 
-// æ¬¢è¿Žç•Œé¢å¼€å§‹æ¸¸æˆæŒ‰é’®
-int startGameLeftTopX = 200, startGameLeftTopY = 300,  startGameRightBottomX = 300,startGameRightBottomY = 350;
-// æ¬¢è¿Žç•Œé¢å…³äºŽæˆ‘ä»¬æŒ‰é’®
-int aboutUsLeftTopX, aboutUsLeftTopY, aboutUsRightBottomX, aboutUsRightBottomY;
-// å…³äºŽæˆ‘ä»¬ç•Œé¢è¿”å›žæ¬¢è¿Žç•Œé¢çš„æŒ‰é’®
-int welcomeLeftTopX, welcomeLeftTopY, welcomeRightBottomX, welcomeRightBottomY;
-// æ¸¸æˆç•Œé¢é€€å‡ºæ¸¸æˆæŒ‰é’®
-int finishLeftTopX, finishLeftTopY, finishRightBottomX, finishRightBottomY;
-// æ¸¸æˆç•Œé¢boardçš„èŒƒå›´
-int boardLeftTopX, boardLeftTopY, boardRightBottomX, boardRightBottomY;
-// ç»“æŸç•Œé¢é€€å‡ºæ¸¸æˆæŒ‰é’®
-int exitLeftTopX, exitLeftTopY, exitRightBottomX, exitRightBottomY;
-// ç»“æŸç•Œé¢é‡æ–°å¼€å§‹æŒ‰é’®
+// »¶Ó­½çÃæ¿ªÊ¼ÓÎÏ·°´Å¥
+int startGameLeftTopX = 335, startGameLeftTopY = 218,  startGameRightBottomX = 335 + 255,startGameRightBottomY = 218+130;
+// »¶Ó­½çÃæ¹ØÓÚÎÒÃÇ°´Å¥
+int aboutUsLeftTopX = 405, aboutUsLeftTopY = 408, aboutUsRightBottomX =405+121, aboutUsRightBottomY=408+44;
+// ¹ØÓÚÎÒÃÇ½çÃæ·µ»Ø»¶Ó­½çÃæµÄ°´Å¥
+int welcomeLeftTopX = 633, welcomeLeftTopY = 477, welcomeRightBottomX = 633 + 83, welcomeRightBottomY = 477 + 94;
+// ÓÎÏ·½çÃæÍË³öÓÎÏ·°´Å¥
+int finishLeftTopX = 703, finishLeftTopY = 457, finishRightBottomX = 703 + 49, finishRightBottomY = 457 + 80;
+// ÓÎÏ·½çÃæboardµÄ·¶Î§
+int boardLeftTopX = 26, boardLeftTopY = 107, boardRightBottomX = 26 + 600, boardRightBottomY = 107 + 464;
+// ½áÊø½çÃæÍË³öÓÎÏ·°´Å¥
+int exitLeftTopX = 418, exitLeftTopY = 457, exitRightBottomX = 418 + 121, exitRightBottomY = 457 + 45;
+// ½áÊø½çÃæÖØÐÂ¿ªÊ¼°´Å¥
 int restartLeftTopX, restartLeftTopY, restartRightBottomX, restartRightBottomY;
 
+int picW = 59, picH = 65;
+
+int scoreX = 640, scoreY = 68;
 
 enum {InGame, InWelcome, InFinish, InAboutUs};
 LinkGame *engine;
 
+int convertX(int x) {
+	return (x - boardLeftTopX) / picW + 1;
+}
+
+int convertY(int y) {
+	return (y - boardLeftTopY) / picH + 1;
+}
+
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
 {
-	int mouseInput = 0;
-	int mouseX, mouseY;
+	int mouseInput = 0, mouseX, mouseY;
+	int white = GetColor(255, 255, 255);
 	bool click = false;
-	SetGraphMode( 640 , 480 , 16 ) ;
+
+	SetGraphMode( 800 , 601 , 32 ) ;
 	DxLib_Init();
-    engine = new LinkGame;
+    
+	engine = new LinkGame;
 	SetMouseDispFlag( TRUE ) ;
-	int Cr = GetColor(  0 , 0 , 255 ) ;// for debug
+	SetDrawScreen(DX_SCREEN_BACK);
+	
 	Point input1, input2, rtn1, rtn2;
 
     while (1)
@@ -40,97 +54,95 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 		if( CheckHitKey( KEY_INPUT_ESCAPE ) == 1 )
 			return 0;
 
-		// æ•æ‰é¼ æ ‡
+		// ²¶×½Êó±ê
 		mouseInput = GetMouseInput();
 		if (( mouseInput & MOUSE_INPUT_LEFT ) != 0)
 		{
 			GetMousePoint( &mouseX, &mouseY );
 		}
 
-        engine->draw(); 
-
         if (engine->getStatus() == InWelcome)
 		{
-			DrawBox(200,300,300,350,Cr,TRUE); // for debug
-            // æ¸¸æˆæ¬¢è¿Žé¡µé¢è¦å“åº”çš„äº‹ä»¶
+			
+            // ÓÎÏ·»¶Ó­Ò³ÃæÒªÏìÓ¦µÄÊÂ¼þ
 			if (mouseInput)
 			{
 				if (mouseX >= startGameLeftTopX && mouseY >= startGameLeftTopY && mouseX <= startGameRightBottomX && mouseY <= startGameRightBottomY )
 					engine->startGame();
 				if (mouseX >= aboutUsLeftTopX && mouseY >= aboutUsLeftTopY && mouseX <= aboutUsRightBottomX && mouseY <= aboutUsRightBottomY )
-					engine->aboutUs();//å…³äºŽæˆ‘ä»¬
+					engine->aboutUs();//¹ØÓÚÎÒÃÇ
+				if (mouseX >= exitLeftTopX && mouseX <= exitRightBottomX && mouseY >= exitLeftTopY && mouseY <= exitRightBottomY) {
+					engine->quit();
+					return 0;
+				}
 			}
         }
         else if (engine->getStatus() == InAboutUs)
         {
-        	// å…³äºŽæˆ‘ä»¬é¡µé¢è¦å“åº”çš„äº‹ä»¶
+        	// ¹ØÓÚÎÒÃÇÒ³ÃæÒªÏìÓ¦µÄÊÂ¼þ
         	if (mouseInput)
         	{
         		if (mouseX >= welcomeLeftTopX && mouseY >= welcomeLeftTopY && mouseX <= welcomeRightBottomX && mouseY <= welcomeRightBottomY)
-        			engine->startGame();
+        			engine->menu();
         	}
         }
 		else if (engine->getStatus() == InGame) 
 		{
-			DrawBox(50,50,350,350,Cr,TRUE); // for debug
-            // æ¸¸æˆè¿›è¡Œé¡µé¢è¦å“åº”çš„äº‹ä»¶
+			
+            // ÓÎÏ·½øÐÐÒ³ÃæÒªÏìÓ¦µÄÊÂ¼þ
 
-			/*-- å…³äºŽæ—¶é—´--*/
+			/*-- ¹ØÓÚÊ±¼ä--*/
 			if (engine->timeIsUp())
 				engine->finish();
 
 			if (engine->getBoard()->empty())
 				engine->finish();
 
-			/*--------------------------------å“åº”é¼ æ ‡----------------------------------------------------*/
+			/*--------------------------------ÏìÓ¦Êó±ê----------------------------------------------------*/
 			if (mouseInput)
 			{
-				// åœ¨Boardå†…
+				// ÔÚBoardÄÚ
 				if (mouseX >= boardLeftTopX && mouseY >= boardLeftTopY && mouseX <= boardRightBottomX && mouseY <= boardRightBottomY)
 				{
-					// è‹¥ä¸ºç¬¬ä¸€æ¬¡é€‰ä¸­å›¾ç‰‡
+					// ÈôÎªµÚÒ»´ÎÑ¡ÖÐÍ¼Æ¬
 					if (click == false)
 					{
 						click = true;
-						/* convertX convertY needed here
 						input1.x = convertX(mouseX);
 						input1.y = convertY(mouseY);
-						*/
 
 						// change the selected picture
 						engine->getBoard()->changeMode(input1);
 					}
 
-					// è‹¥é€‰ä¸­äº†ç¬¬äºŒå¼ å›¾ç‰‡
+					// ÈôÑ¡ÖÐÁËµÚ¶þÕÅÍ¼Æ¬
 					else
 					{
 						click = false;
-						/* convertX convertY needed here
 						input2.x = convertX(mouseX);
 						input2.y = convertY(mouseY);
-						*/
 
-						// å¯¹engineå†…boardè°ƒç”¨å‡½æ•°
+						// ¶ÔengineÄÚboardµ÷ÓÃº¯Êý
 
 						if (engine->getBoard()->findPath(input1,input2,rtn1,rtn2) <0 || (input1.x == input2.x&&input1.y == input2.y))
 						{
-							// æ¢å¤è¢«é€‰ä¸­å›¾ç‰‡çŠ¶æ€
+							// »Ö¸´±»Ñ¡ÖÐÍ¼Æ¬×´Ì¬
 							engine->getBoard()->resetMode(input1);
 							
 						}
 						else
 						{
-							engine->getBoard()->remove(input1, input2); // åˆ é™¤å›¾ç‰‡
-							// ç”»çº¿!
+							engine->getBoard()->remove(input1, input2); // É¾³ýÍ¼Æ¬
+							// »­Ïß!
 						}
 
 					}
 				}
 
-				// Boardå¤–
+				// BoardÍâ
 				else
 				{
-					// è‹¥å·²ç»é€‰ä¸­äº†ä¸€å¼ å›¾ç‰‡ï¼Œå°†å…¶æ¢å¤
+					// ÈôÒÑ¾­Ñ¡ÖÐÁËÒ»ÕÅÍ¼Æ¬£¬½«Æä»Ö¸´
 					if (click == true)
 						engine->getBoard()->resetMode(input1);
 
@@ -141,11 +153,11 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 					}
 				}
 			}
-			/*--------------------------------å“åº”é¼ æ ‡ç»“æŸ----------------------------------------------------*/
+			/*--------------------------------ÏìÓ¦Êó±ê½áÊø----------------------------------------------------*/
         } 
 		else if (engine->getStatus() == InFinish)
 		{
-            // æ¸¸æˆç»“æŸé¡µé¢è¦å“åº”çš„äº‹ä»¶
+            // ÓÎÏ·½áÊøÒ³ÃæÒªÏìÓ¦µÄÊÂ¼þ
 			if (mouseInput)
 			{
 				if (mouseX >= restartLeftTopX && mouseY >= restartLeftTopY && mouseX <= restartRightBottomX && mouseY <= restartRightBottomY )
@@ -161,6 +173,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             printf("Something Went Wrong!\n");
             return 0;
         }
+
+		engine->draw();
     }
 
     return 0;

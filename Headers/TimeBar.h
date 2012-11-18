@@ -2,9 +2,9 @@
 #define TIME_BAR_H
 
 // globla viarables for conveniently modifying
-#define TIME_DECREASE 0.05;        // value decreases every frame
-#define TIME_INCREASE 1;           // reward when a link is done
-#define TIME_MAXVALUE 60;          // initialized time value
+#define TIME_DECREASE 0.05         // value decreases every frame
+#define TIME_INCREASE 1            // reward when a link is done
+#define TIME_MAXVALUE 60           // initialized time value
 
 
 class TimeBar
@@ -20,7 +20,7 @@ public:
 
     double getValue();              // API to private value
 
-    double toBonus();               // 鍓╀綑鐨勬椂闂磋兘澶熷厬鎹负澶氬皯鍒嗘暟
+    double toBonus();               // 剩余的时间能够兑换为多少分数
 
 private:
     double maxValue;                // max and initialized time
