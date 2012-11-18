@@ -4,7 +4,6 @@
 #include "DxLib.h"
 #include <stdio.h>
 
-int score = 0;
 // 欢迎界面开始游戏按钮
 int startGameLeftTopX = 200, startGameLeftTopY = 300,  startGameRightBottomX = 300,startGameRightBottomY = 350;
 // 欢迎界面关于我们按钮
@@ -32,7 +31,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 	DxLib_Init();
     LinkGame *engine = new LinkGame;
 	SetMouseDispFlag( TRUE ) ;
-	int Cr = GetColor(   0 ,   0 , 255 ) ;// for debug
+	int Cr = GetColor(  0 , 0 , 255 ) ;// for debug
 	Point input1, input2, rtn1, rtn2;
 
     while (1)

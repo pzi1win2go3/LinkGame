@@ -41,7 +41,8 @@ void ComboBar::bingo()
 {
     double up = COMBO_INCREASE;
 
-    score += value;
+    int score = engine->getScore() + (int)value;
+    engine->setScore(score);
 
     if (value + up <= maxValue)
         value += up;
