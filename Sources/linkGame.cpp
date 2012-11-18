@@ -42,3 +42,8 @@ void LinkGame::init() {
 int LinkGame::getStatus() {
     return gameStatus;
 }
+
+Board* LinkGame::getBoard()
+{
+	return board;
+}

@@ -2,7 +2,7 @@
 #define LINK_GAME_H
 
 #include "Board.h"
-#include "../Headers/ComboBar.h"
+#include "ComboBar.h"
 #include "Point.h"
 #include "TimeBar.h"
 class LinkGame
@@ -40,6 +40,8 @@ public:
     void finish();          // 进入游戏结束页
 
     int getStatus();
+
+	Board * getBoard();
 };
 
 #endif

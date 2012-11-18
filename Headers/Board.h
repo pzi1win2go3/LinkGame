@@ -17,6 +17,10 @@ public:
 	bool isDirectlyLinked(int x1,int y1,int x2,int y2);
 	bool isTwoEdgesLinked(int x1,int y1,int x2,int y2,Point &temp);
 	bool isThreeEdgesLinked(int x1,int y1,int x2,int y2,Point &m,Point &n);
+	void remove(Point p1, Point p2);
+	void changeMode(Point p);
+	void resetMode(Point p);
+	bool empty();
 private:
 	int** matrix;												// -1 for no picture, 0..n for picture number
 	int length;													// horizontal length  2nd dimension in array
