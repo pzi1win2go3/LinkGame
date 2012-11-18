@@ -1,6 +1,6 @@
 #ifndef COMBOBAR_H
 #define COMBOBAR_H
-
+#include "LinkGame.h"
 extern LinkGame *engine;
 
 // globla viarables for conveniently modifying
