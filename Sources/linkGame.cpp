@@ -28,7 +28,7 @@ void LinkGame::reset() {
 }
 
 void LinkGame::finish() {
-    gameStatus = Infifinish;
+    gameStatus = InFinish;
 }
 
 void LinkGame::init() {

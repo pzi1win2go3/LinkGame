@@ -1,7 +1,7 @@
 #ifndef COMBOBAR_H
 #define COMBOBAR_H
 
-extern double score;
+extern int score;
 
 // globla viarables for conveniently modifying
 #define COMBO_DECREASE 0.1;                // value decrease every frame
