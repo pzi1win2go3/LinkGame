@@ -38,3 +38,7 @@ void LinkGame::init() {
     comboBar = new ComboBar();
     score = 0;
 }
+
+int LinkGame::getStatus() {
+    return gameStatus;
+}

@@ -38,6 +38,8 @@ public:
     void reset();           // 重置游戏环境
 
     void finish();          // 进入游戏结束页
+
+    int getStatus();
 };
 
 #endif

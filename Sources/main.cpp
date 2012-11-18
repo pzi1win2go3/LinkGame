@@ -1,5 +1,9 @@
-int score = 0;
 #include "../Headers/LinkGame.h"
+#include <stdio.h>
+
+int score = 0;
+
+enum {InGame, InWelcome, InFinish};
 
 int main()
 {
@@ -7,6 +11,17 @@ int main()
 
     while (1) {
         engine->draw();
+
+        if (engine->getStatus() == InWelcome) {
+
+        } else if (engine->getStatus() == InGame) {
+
+        } else if (engine->getStatus() == InFinish) {
+
+        } else {
+            printf("Something Went Wrong!\n");
+            return 0;
+        }
     }
 
     return 0;
