@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include "../Headers/LinkGame.h"
 
 LinkGame::LinkGame()
@@ -45,4 +46,8 @@ int LinkGame::getStatus() {
 
 void timerEvent() {
     timeBar->passBy();
+}
+
+Board *getBoard() {
+    return board;
 }

@@ -21,7 +21,7 @@ public:
 
     double getHighestValue();               // API to private highest value
 
-    void fallDown();       // decrease value, called every frame
+    void fallDown();                        // decrease value, called every frame
 
     void bingo();                           // make bar jump up and update your score, called when a link is down
 

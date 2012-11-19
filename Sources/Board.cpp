@@ -348,3 +348,24 @@ void Board::show()
     }
 }
 
+void Board::remove(Point p1, Point p2)
+{
+	matrix[p1.x][p1.y] = matrix[p2.x][p2.y] = -1;
+	pointLeft -= 2;
+	return;
+}
+
+void Board::changeMode(Point p)
+{
+	matrix[p.x][p.y] += 1000;
+}
+
+void Board::resetMode(Point p)
+{
+	matrix[p.x][p.y] -= 1000;
+}
+
+bool Board::empty()
+{
+	return pointLeft == 0;
+}
