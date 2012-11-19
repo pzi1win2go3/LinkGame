@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #ifndef LINK_GAME_H
 #define LINK_GAME_H
 

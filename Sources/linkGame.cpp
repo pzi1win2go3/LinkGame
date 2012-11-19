@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include "../Headers/LinkGame.h"
 
 LinkGame::LinkGame()
