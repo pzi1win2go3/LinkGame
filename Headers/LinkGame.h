@@ -40,6 +40,8 @@ public:
     void finish();          // 进入游戏结束页
 
     int getStatus();
+
+    void timerEvent();      // 每一帧都要做的事情
 };
 
 #endif

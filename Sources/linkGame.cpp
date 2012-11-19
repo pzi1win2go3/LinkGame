@@ -42,3 +42,7 @@ void LinkGame::init() {
 int LinkGame::getStatus() {
     return gameStatus;
 }
+
+void timerEvent() {
+    timeBar->passBy();
+}
